@@ -62,3 +62,62 @@ public class MyTest {
   }
 }
 ```
+
+
+### [checkstyle (linting)](https://checkstyle.sourceforge.io/)
+
+`./gradlew check`
+
+```
+apply plugin: 'checkstyle'
+
+checkstyle {
+  toolVersion "8.1"
+  config = rootProject.resources.text.fromFile('checkstyle.xml')
+}
+```
+
+
+### [PMD (code analyzer)](https://pmd.github.io)
+
+`./gradlew pmdMain` or `./gradlew pmdTest`
+
+```
+apply plugin: 'pmd'
+
+pmd {
+  toolVersion "6.7.0"
+  ruleSets = []
+  ruleSetFiles = files('pmd-ruleset.xml')
+}
+```
+
+### [jacoco code coverage](https://www.eclemma.org/jacoco/)
+
+`./gradlew jacocoTestReport` or `./gradlew jacocoTestCoverageVerification`
+
+```
+apply plugin: 'jacoco'
+
+// jacoco configs
+jacoco {
+  toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+  reports {
+    xml.enabled true
+    html.enabled true
+  }
+}
+
+jacocoTestCoverageVerification {
+  violationRules {
+    rule {
+      limit {
+        minimum = 0.01
+      }
+    }
+  }
+}
+```
